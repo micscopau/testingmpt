@@ -33,33 +33,31 @@ public class HomeController
 	 }
     
 	
-	
 	@RequestMapping(value = "/login", method = RequestMethod.POST)
     public String submit(@ModelAttribute("userForm") User user,BindingResult result,ModelMap model) 
     {
         // Query database to call check if the username and password exist and password match or not 	
-    	fName=userdao.checkUser(user);
-    	if(fName.equals("NULL"))
+    	user = userdao.checkUser(user);
+    	if(user.getuserName()==null) {
+    		System.out.println("failed login");
     		return "index";
+    	}
 
-    	model.addAttribute("fName",fName);
+    	model.addAttribute("fName",user.getfName());
+    	System.out.println("login succeeded");
     	return "userLoggedin";
     	//else 
     		//return errorLogin.jsp
     }
  
-    
-	
-	
+ 
 	@RequestMapping(value = "/registration", method = RequestMethod.GET)
     public ModelAndView createAccount (@ModelAttribute("userForm") User user,ModelMap model)
     {
     	 return new ModelAndView("createaccount", "user", new User(fName,lName,Username,email,Password));
     }
     
-   
-	
-	
+ 
 	@RequestMapping(value = "/addAccount", method = RequestMethod.POST)
     public String addUseraccount(@ModelAttribute("userForm") User user,BindingResult result,ModelMap model) throws SQLException
     {
@@ -72,8 +70,6 @@ public class HomeController
     }
     
    
-	
-	
 	@RequestMapping(value = "/logout")
     public String userLogout(@ModelAttribute("userForm") User user,ModelMap model)
     {
@@ -81,18 +77,15 @@ public class HomeController
     }
     
    
-	
-	
 	@RequestMapping(value = "/editprofile")
     public ModelAndView  viewProfile(@ModelAttribute("userForm") User user,ModelMap model)
-    {
-    	 return new ModelAndView("viewprofile", "user", new User(fName,lName,Username,email,Password));
+    {	
+		model.addAttribute("uName", user.getuserName());
+		System.out.println("Here with user: " + user.getuserName());
+    	 return new ModelAndView("viewprofile", "user", user);
     }
     
    
-	
-	
-	
 	@RequestMapping(value = "/profile")
     public String profile(@ModelAttribute("userForm") User user,ModelMap model,@RequestParam String action)
     {

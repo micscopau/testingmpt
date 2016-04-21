@@ -12,11 +12,8 @@ import com.mycu.model.User;
 public class HibernateUtil 
 {
 
-
-	public HibernateUtil()
-	{
-		
-	}
+	public HibernateUtil()	{}
+	
 // A SessionFactory is set up once for an application!
    final static StandardServiceRegistry registry = new StandardServiceRegistryBuilder()
             .configure() // configures settings from hibernate.cfg.xml
@@ -48,10 +45,10 @@ public class HibernateUtil
 	    }
 	    return sessionFactory;
 	}
+	
 	public SessionFactory addAccount(User user)
 	{
 		System.out.println("/user data:" + user.getfName());
-		
 		 return sessionFactory;
 	}
 

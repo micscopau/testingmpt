@@ -14,11 +14,12 @@ public class UserDAO
 	private String Username,password;
 	private String email,fName,lName;
 	private int uID;
+	
 	public UserDAO()
 	{
-		
 	}
-	public String checkUser(User user)
+	
+	public User checkUser(User user)
 	{
 		SessionFactory sessionFactory = HibernateUtil.getSessionFactory();
 		Session session = sessionFactory.openSession();
@@ -31,11 +32,11 @@ public class UserDAO
 	         List<User> user2 = query.list();
 	         for(User user3 : user2)
 	         {
-	             System.out.println("List of Users::"+user3.getuId()+","+user3.getfName());
+	             System.out.println("UserID: "+user3.getuId()+" UserName: "+user3.getfName());
 	             if(user3.getpassword().equals(user.getpassword()) && user3.getuserName().equals(user.getuserName()))
-	            	 fName=user3.getfName();
-	             else
-	            	 fName="NULL";
+	            	 return user3;
+	            // else
+	            //	 return new User();
 	         }
 	    	//query.setParameter("userName", user.getuserName());
 	         //session.flush();
@@ -45,7 +46,7 @@ public class UserDAO
 	    }catch (HibernateException e) {
 	        e.printStackTrace();
 	    }
-	    return fName;
+	    return new User();
 	}
 	
 	
@@ -55,7 +56,6 @@ public class UserDAO
     	SessionFactory sessionFactory = HibernateUtil.getSessionFactory();
  		Session session = sessionFactory.openSession();
  		session.beginTransaction();
- 		// this would save the Student_Info object into the database
  		 session.save(user);	
  		 session.getTransaction().commit();
  		// session.close();
@@ -63,6 +63,14 @@ public class UserDAO
  		 return fName;
 	}
 	
+	public String editUser(User user)
+	{
+		SessionFactory sessionFactory = HibernateUtil.getSessionFactory();
+		Session session = sessionFactory.openSession();
+		session.beginTransaction();
+		
+		return Username;
+	}
 	
 	public String save(User user)
 	{

@@ -9,13 +9,15 @@ import javax.persistence.Table;
 import org.hibernate.annotations.GenericGenerator;
 
 @Entity
-@Table(name="Userprofile")
+@Table(name="userinfo")
 public class User 
 {
 	@Id 
 	@GenericGenerator(name="generator", strategy="increment")
 	@GeneratedValue(generator="generator")
 	private int    uId;
+	
+	
 	public String fName,lName, userName;
 	private String email,password;
 	public int getuId() 

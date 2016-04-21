@@ -17,6 +17,4 @@ public class Movie
 		this.movieTitle = movieTitle;
 	}
 	
-	
-	
 }

@@ -16,7 +16,7 @@
 				 <form:form action="login" method="post" modelAttribute="userForm">
 					<form:input path="userName" />
 					<form:input path="Password" />
-					<input type="submit" value="Submit">
+					<input type="submit" value="Log In">
 				</form:form>
 				 <form action="registration" method="GET">
 					
